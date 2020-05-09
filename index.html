@@ -58,11 +58,18 @@
                     
                     if (get_id) id = get_id;
 
+                    // peer = new Peer(id, {
+                    //   host: '127.0.0.1',
+                    //   port: 9000,
+                    //   path: '/myapp',
+                    //   debug: 2
+                    // });
+
                     peer = new Peer(id, {
-                      host: '174.138.67.236',
-                      port: 9000,
-                      path: '/oceanodigital',
-                      debug: 2
+                      // host: '174.138.67.236',
+                      // port: 4561,
+                      // path: '/oceano',
+                      // debug: 2
                     });
 
                     peer.on('open', function (id) {
