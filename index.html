@@ -22,6 +22,8 @@
       <button id="connect-button">Connect</button>
       <span id="sender_status" style="font-weight: bold"> Sender status </span>
       <span id="receiver_status" style="font-weight: bold;color: red"> Receiver status </span>
+      <input id="remote_output_send_num" type="number" id="quantity" name="quantity" min="0" max="9" value="0">
+
   </div>
 
   <div id="midi-monitor">
@@ -42,6 +44,7 @@
                 var sender_status = document.getElementById("sender_status");
                 var receiver_status = document.getElementById("receiver_status");
                 var connectButton = document.getElementById("connect-button");
+                var remote_output_send_num = document.getElementById("remote_output_send_num");
 
                 const queryString = window.location.search;
                 const urlParams = new URLSearchParams(queryString);
@@ -167,8 +170,10 @@
                         var array = new Uint8Array(data['data']);
                         var timestamp =  data['timestamp'];
                         list = []; for (i in array){list.push(array[i])}
-                        // console.log(list, timestamp);                       
-                        WebMidi.outputs[1]._midiOutput.send(list,timestamp);
+                        // console.log(list, timestamp);
+                        var remote_output_send = int(remote_output_send_num.value);
+                        console.log('remote_output_send',remote_output_send);
+                        WebMidi.outputs[remote_output_send]._midiOutput.send(list,timestamp);
                     });
                     // conn.on('close', function () {
                     //     receiver_status.innerHTML = "Connection reset Awaiting connection...";
