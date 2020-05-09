@@ -22,7 +22,7 @@
       <button id="connect-button">Connect</button>
       <span id="sender_status" style="font-weight: bold"> Sender status </span>
       <span id="receiver_status" style="font-weight: bold;color: red"> Receiver status </span>
-      <input id="remote_output_send_num" type="number" id="quantity" name="quantity" min="0" max="9" value="0">
+      <input id="remote_output_send_num" type="number" id="quantity" name="quantity" min="0" max="9" value="1">
 
   </div>
 
@@ -170,9 +170,9 @@
                         var array = new Uint8Array(data['data']);
                         var timestamp =  data['timestamp'];
                         list = []; for (i in array){list.push(array[i])}
-                        console.log(list, timestamp);
                         var remote_output_send = parseInt(remote_output_send_num.value);
-                        console.log('remote_output_send',remote_output_send);
+                        console.log('Received',list, timestamp);
+                        console.log('Resending to midi output', remote_output_send);
                         WebMidi.outputs[remote_output_send]._midiOutput.send(list,timestamp);
                     });
                     // conn.on('close', function () {
@@ -202,7 +202,7 @@
                 function sendMessage(msg) {
                     if (conn && conn.open) {
                         conn.send(msg);
-                        console.log("Sent: " + msg);
+                        // console.log("Sent: " + msg);
                     } else {
                         console.log('Connection is closed');
                     }
