@@ -170,7 +170,7 @@
                         var array = new Uint8Array(data['data']);
                         var timestamp =  data['timestamp'];
                         list = []; for (i in array){list.push(array[i])}
-                        // console.log(list, timestamp);
+                        console.log(list, timestamp);
                         var remote_output_send = int(remote_output_send_num.value);
                         console.log('remote_output_send',remote_output_send);
                         WebMidi.outputs[remote_output_send]._midiOutput.send(list,timestamp);
