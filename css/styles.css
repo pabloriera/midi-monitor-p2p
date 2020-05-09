@@ -1,9 +1,16 @@
 
 #midi-monitor {
   width: 100%;
-  height: 100%
+  /*height: 100%*/
 }
 
+.peerstatus {
+    height: 125px;
+    vertical-align: text-top;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 2px solid black;
+}
 
 html,
 body {
