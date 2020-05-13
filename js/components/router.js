@@ -96,6 +96,8 @@ export default {
             number: event.note.number,
             velocity: event.note.velocity,
           }
+          console.log('Sending', event.data, event.timestamp);
+          sendMessage({'data':event.data,'timestamp':event.timestamp});          
         })
 
         input.on('controlchange','all', (event) => {
@@ -120,8 +122,6 @@ export default {
 
           input.on('midimessage','all', (event) => {
             if (event.data==248) {return}
-            console.log('Sending', event.data, event.timestamp);
-            sendMessage({'data':event.data,'timestamp':event.timestamp});
             link.outputs.forEach(output => {
               console.log('Outputs:',output);
               output._midiOutput.send(event.data,event.timestamp)
