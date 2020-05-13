@@ -120,7 +120,7 @@ export default {
 
           input.on('midimessage','all', (event) => {
             if (event.data==248) {return}
-            console.log('Sending', event.data, event.timestamp);  
+            console.log('Sending', event.data, event.timestamp);
             sendMessage({'data':event.data,'timestamp':event.timestamp});
             link.outputs.forEach(output => {
               console.log('Outputs:',output);
