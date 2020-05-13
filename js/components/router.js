@@ -100,6 +100,12 @@ export default {
           sendMessage({'data':event.data,'timestamp':event.timestamp});          
         })
 
+        input.on('noteoff','all',(event) => {
+          console.log('Sending', event.data, event.timestamp);
+          sendMessage({'data':event.data,'timestamp':event.timestamp});          
+        })
+
+
         input.on('controlchange','all', (event) => {
           this.inCc={
             channel: event.channel,
