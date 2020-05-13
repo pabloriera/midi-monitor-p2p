@@ -8,6 +8,42 @@
   <link rel="stylesheet" href="css/styles.css" />
   <script src="js/assets/vue.min.js"></script>
   <script src="js/assets/webmidi.min.js"></script>
+<style>
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+</style>
 
 </head>
 
@@ -23,7 +59,7 @@
       <span id="sender_status" style="font-weight: bold"> Sender status </span>
       <span id="receiver_status" style="font-weight: bold;color: red"> Receiver status </span>
       <input id="remote_output_send_num" type="number" id="quantity" name="quantity" min="0" max="9" value="1">
-
+      <input type="range" min="-1000" max="1000" value="0" class="slider" id="offset_slider">
   </div>
 
   <div id="midi-monitor">
@@ -45,6 +81,8 @@
                 var receiver_status = document.getElementById("receiver_status");
                 var connectButton = document.getElementById("connect-button");
                 var remote_output_send_num = document.getElementById("remote_output_send_num");
+                var offset_slider = document.getElementById("offset_slider");
+
 
                 const queryString = window.location.search;
                 const urlParams = new URLSearchParams(queryString);
@@ -171,9 +209,10 @@
                         var timestamp =  data['timestamp'];
                         list = []; for (i in array){list.push(array[i])}
                         var remote_output_send = parseInt(remote_output_send_num.value);
-                        console.log('Received',list, timestamp);
+                        var offset = parseInt(offset_slider.value);
+                        console.log('Received',list, timestamp+offset);
                         console.log('Resending to midi output', remote_output_send);
-                        WebMidi.outputs[remote_output_send]._midiOutput.send(list,timestamp);
+                        WebMidi.outputs[remote_output_send]._midiOutput.send(list,timestamp+offset);
                     });
                     // conn.on('close', function () {
                     //     receiver_status.innerHTML = "Connection reset Awaiting connection...";
