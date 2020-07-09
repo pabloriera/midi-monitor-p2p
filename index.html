@@ -109,10 +109,10 @@
                     console.log(host);
 
                     peer = new Peer(id, {
-                      // host: host,
-                      // port: 9000,
-                      // path: '/myapp',
-                      // debug: 2
+                      host: host,
+                      port: 9000,
+                      path: '/',
+                      debug: 2
                     });
 
                     peer.on('open', function (id) {
