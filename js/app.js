@@ -1,4 +1,6 @@
 
+Vue.config.devtools = true;
+
 Vue.prototype.$midiBus = new Vue(); // Global event bus
 
 import midiBus from './components/midi-bus.js'
