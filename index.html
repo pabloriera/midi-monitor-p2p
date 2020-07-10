@@ -226,7 +226,7 @@
                         var remote_output_send = parseInt(remote_output_send_num.value);
                         var offset = parseInt(offset_slider.value);
                         console.log('Received',list, timestamp+offset);
-                        console.log('Resending to midi output', remote_output_send);
+                        console.log('Resending to midi output', WebMidi.outputs[remote_output_send].name);
                         WebMidi.outputs[remote_output_send]._midiOutput.send(list,timestamp+offset);
                     });
                     // conn.on('close', function () {
