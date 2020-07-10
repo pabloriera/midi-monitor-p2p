@@ -82,7 +82,9 @@
                 var connectButton = document.getElementById("connect-button");
                 var remote_output_send_num = document.getElementById("remote_output_send_num");
                 var offset_slider = document.getElementById("offset_slider");
-
+                document.addEventListener("DOMContentLoaded", function() {
+                  auto_connect();
+                });
 
                 const queryString = window.location.search;
                 const urlParams = new URLSearchParams(queryString);
@@ -163,7 +165,10 @@
                         console.log(err);
                         alert('' + err);
                     });
+                };
 
+                function auto_connect()
+                {
                     if (connect_to)
                     {
                       console.log('URL Connect to ' + connect_to);
