@@ -31,20 +31,28 @@ export default {
         {{output.name}}
       </div>
 
+      <div :class="{selected:checkLink(input.id,output.id)}"
+            v-for="output in outputs"
+            v-if="input.name!=output.name"
+            @click="toggleLink(input.id,output.id); console.log(input.id,output.id);"
+            :key="output.id"
+            class="status">
+        {{output.name}}
+      </div>
+
     </div>
   </div>
   `,
   data() {
-    var inputs_ = WebMidi.inputs;
-    var outputs_ = WebMidi.outputs;
-    // inputs_.push({'name':'new_in','id':'12345678'});
-    // outputs_.push({'name':'new_out','id':'12345678'});
+    var rtcoutputs = [{'name':'To Peer','id':'12345678'}];
+
     return {
       clock:null,
       inNote:null,
       inCc:null,
-      inputs:inputs_,
-      outputs:outputs_,
+      inputs:WebMidi.inputs,
+      outputs:WebMidi.outputs,
+      rtcoutputs: rtcoutputs
       links: {},
     }
   },

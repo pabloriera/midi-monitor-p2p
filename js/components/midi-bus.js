@@ -60,15 +60,14 @@ export default {
   `,
   props: ['absolute','channels'],
   data() {
-    var rtcinputs = [{'name':'Peer','id':'12345678'}];
-    // outputs_.push({'name':'new_out','id':'12345678'});
-    // inputs_.push(WebMidi.inputs[2]);
+    var rtcinputs = [{'name':'From Peer','id':'12345678'}];
     return {
       midi: {
         supported:WebMidi.supported,
         inputs: WebMidi.inputs,
         outputs: WebMidi.outputs,
         rtcinputs: rtcinputs
+        rtcoutputs: rtcoutputs
       },
       activeOutputs:{},
       selected:WebMidi.inputs[0]||null
