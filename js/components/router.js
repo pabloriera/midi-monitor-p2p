@@ -87,11 +87,30 @@ export default {
     getLinks(id) {
       return this.links.filter(link => link.input==this.device.id)
     },
+    set_peer_send(port){
+        port.on('noteon','all',(event) => {
+          if(send_all_toggle.checked)
+          {
+            console.log('Sending', event.data, event.timestamp);
+            sendMessage({'data':event.data,'timestamp':event.timestamp});
+          }
+        })
+
+        port.on('noteoff','all',(event) => {          
+          if(send_all_toggle.checked)
+          {
+            console.log('Sending', event.data, event.timestamp);
+            sendMessage({'data':event.data,'timestamp':event.timestamp});
+          }
+        })
+    },
     buildLinks() {
-      WebMidi.removeListener();
+      // WebMidi.removeListener();
       console.log('Build links')
 
       this.inputs.forEach((input) => {
+
+        input.removeListener();
 
         input.on('noteon','all',(event) => {
           this.inNote = {
@@ -102,20 +121,20 @@ export default {
             velocity: event.note.velocity,
           }
           
-          if(send_all_toggle.checked)
-          {
-            console.log('Sending', event.data, event.timestamp);
-            sendMessage({'data':event.data,'timestamp':event.timestamp});
-          }
+          // if(send_all_toggle.checked)
+          // {
+          //   console.log('Sending', event.data, event.timestamp);
+          //   sendMessage({'data':event.data,'timestamp':event.timestamp});
+          // }
         })
 
-        input.on('noteoff','all',(event) => {          
-          if(send_all_toggle.checked)
-          {
-            console.log('Sending', event.data, event.timestamp);
-            sendMessage({'data':event.data,'timestamp':event.timestamp});
-          }
-        })
+        // input.on('noteoff','all',(event) => {          
+        //   if(send_all_toggle.checked)
+        //   {
+        //     console.log('Sending', event.data, event.timestamp);
+        //     sendMessage({'data':event.data,'timestamp':event.timestamp});
+        //   }
+        // })
 
 
         input.on('controlchange','all', (event) => {

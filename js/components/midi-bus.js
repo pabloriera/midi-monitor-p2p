@@ -24,7 +24,7 @@ export default {
         </div>
 
         <div
-          @click="selected==input ? selected=null : selected=input; console.log('click')"
+          @click="selected==input ? selected=null : selected=input;"
           v-for="input in midi.rtcinputs"
           class="status" :class="{selected:input==selected}">
           {{input.name}}
