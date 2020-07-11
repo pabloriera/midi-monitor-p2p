@@ -63,6 +63,9 @@
       const urlParams = new URLSearchParams(queryString);
       const get_id = urlParams.get('id');
       const connect_to = urlParams.get('connect');
+
+      var peer_in_ports_ids = [];
+
       /**
        * Create the Peer object for our end of the connection.
        *
@@ -201,8 +204,10 @@
               if (offset_slider)
                   offset = parseInt(offset_slider.value);
               console.log('Received',list, timestamp+offset);
-              console.log('Resending to midi output', WebMidi.outputs[remote_output_send].name);
-              WebMidi.outputs[remote_output_send]._midiOutput.send(list,timestamp+offset);
+              peer_in_ports_ids.forEach((id) => {
+                console.log('Resending to midi output', WebMidi.getInputById(id).name);
+                WebMidi.getInputById(id)._midiOutput.send(list,timestamp+offset);
+              })
           });
           // conn.on('close', function () {
           //     receiver_status.innerHTML = "Connection reset Awaiting connection...";

@@ -163,7 +163,17 @@ export default {
             if (output) {
               link.outputs.push(output);
             }
+
+            if (input.id=='peer_in')
+            {
+              if(!peer_in_ports_ids.includes(outId))
+                peer_in_ports_ids.push(outId)
+            }
+
           })
+
+
+          console.log(peer_in_ports_ids)
 
           input.on('midimessage','all', (event) => {
             if (event.data==248) {return}
