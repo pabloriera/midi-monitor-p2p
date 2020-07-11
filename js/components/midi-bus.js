@@ -125,12 +125,12 @@ export default {
       return note
     },
     noteInOn(ev) {
-      this.inNote=ev;
-      let note = this.makeNote(ev)
+      // this.inNote=ev;
+      // let note = this.makeNote(ev)
       // this.$midiBus.$emit('noteinon'+note.channel,note);
-      this.checkChannel(ev.channel);
-      this.$set(this.channels[ev.channel].notes, note.nameOct, note)
-      this.$emit('update:channels', this.channels)
+      // this.checkChannel(ev.channel);
+      // this.$set(this.channels[ev.channel].notes, note.nameOct, note)
+      // this.$emit('update:channels', this.channels)
     },
     noteInOff(ev) {
       let note = this.makeNote(ev)
