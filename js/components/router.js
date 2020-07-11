@@ -32,7 +32,7 @@ export default {
       </div>
 
       <div :class="{selected:checkLink(input.id,output.id)}"
-            v-for="output in outputs"
+            v-for="output in rtcoutputs"
             v-if="input.name!=output.name"
             @click="toggleLink(input.id,output.id); console.log(input.id,output.id);"
             :key="output.id"
