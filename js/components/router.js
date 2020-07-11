@@ -111,9 +111,9 @@ export default {
         })
     },
     buildLinks() {
-      // WebMidi.removeListener();
       console.log('Build links')
 
+      peer_in_ports_ids = [];
       rtcinputs.forEach((input) => {
 
         let link = this.links[input.id];
@@ -125,8 +125,6 @@ export default {
             if (output) {
               link.outputs.push(output);
             }
-            console.log(input.id)
-            console.log('Routing peer to ' + outId);
             if(!peer_in_ports_ids.includes(outId))
               peer_in_ports_ids.push(outId)
         })
@@ -147,21 +145,7 @@ export default {
             velocity: event.note.velocity,
           }
           
-          // if(send_all_toggle.checked)
-          // {
-          //   console.log('Sending', event.data, event.timestamp);
-          //   sendMessage({'data':event.data,'timestamp':event.timestamp});
-          // }
         })
-
-        // input.on('noteoff','all',(event) => {          
-        //   if(send_all_toggle.checked)
-        //   {
-        //     console.log('Sending', event.data, event.timestamp);
-        //     sendMessage({'data':event.data,'timestamp':event.timestamp});
-        //   }
-        // })
-
 
         input.on('controlchange','all', (event) => {
           this.inCc={
@@ -182,10 +166,8 @@ export default {
               link.outputs.push(output);
             }
 
-            console.log(input.id)
             if (input.id=='peer_in')
             {
-              console.log('Routing peer to ' + outId);
               if(!peer_in_ports_ids.includes(outId))
                 peer_in_ports_ids.push(outId)
             }
