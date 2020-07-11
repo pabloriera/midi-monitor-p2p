@@ -32,7 +32,9 @@
     background: #4CAF50;
     cursor: pointer;
   }
-  .switch {
+
+
+.switch {
   position: relative;
   display: inline-block;
   width: 60px;

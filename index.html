@@ -21,13 +21,17 @@
     <button id="connect-button">Connect</button>
     <span id="sender_status" style="font-weight: bold"> Sender status </span>
     <span id="receiver_status" style="font-weight: bold;color: red"> Receiver status </span>
-    <input id="remote_output_send_num" type="number" id="quantity" name="quantity" min="0" max="9" value="1">
-    <input type="range" min="-1000" max="1000" value="0" class="slider" id="offset_slider">
-    <input type="s" min="-1000" max="1000" value="0" class="slider" id="offset_slider">
-    <label class="switch">
-      <input type="checkbox" checked>
+    </br>
+    <span style="font-weight: bold">Send all midi to peer: </span>
+    <label class="switch"  style="transform: scale(0.6)">
+      <input id="send_all_toggle" type="checkbox" checked>
       <span class="slider_toggle round"></span>
     </label>
+
+    <span style="font-weight: bold">Redirect peer data to port: </span>
+    <input id="remote_output_send_num" type="number" id="quantity" name="quantity" min="0" max="9" value="1">
+    <!-- <input type="range" min="-1000" max="1000" value="0" class="slider" id="offset_slider"> -->
+    
   </div>
 
   <div id="midi-monitor">

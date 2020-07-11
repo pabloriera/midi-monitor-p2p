@@ -90,7 +90,7 @@ export default {
     buildLinks() {
       WebMidi.removeListener();
       console.log('Build links')
-      
+
       this.inputs.forEach((input) => {
 
         input.on('noteon','all',(event) => {
@@ -101,13 +101,20 @@ export default {
             number: event.note.number,
             velocity: event.note.velocity,
           }
-          console.log('Sending', event.data, event.timestamp);
-          sendMessage({'data':event.data,'timestamp':event.timestamp});          
+          
+          if(send_all_toggle.checked)
+          {
+            console.log('Sending', event.data, event.timestamp);
+            sendMessage({'data':event.data,'timestamp':event.timestamp});
+          }
         })
 
-        input.on('noteoff','all',(event) => {
-          console.log('Sending', event.data, event.timestamp);
-          sendMessage({'data':event.data,'timestamp':event.timestamp});          
+        input.on('noteoff','all',(event) => {          
+          if(send_all_toggle.checked)
+          {
+            console.log('Sending', event.data, event.timestamp);
+            sendMessage({'data':event.data,'timestamp':event.timestamp});
+          }
         })
 
 

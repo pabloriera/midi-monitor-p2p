@@ -7,6 +7,8 @@ var receiver_status = document.getElementById("receiver_status");
 var connectButton = document.getElementById("connect-button");
 var remote_output_send_num = document.getElementById("remote_output_send_num");
 var offset_slider = document.getElementById("offset_slider");
+var send_all_toggle = document.getElementById("send_all_toggle");
+
 document.addEventListener("DOMContentLoaded", function() {
   auto_connect();
 });
@@ -149,7 +151,9 @@ function received2midi() {
         var timestamp =  data['timestamp'];
         list = []; for (i in array){list.push(array[i])}
         var remote_output_send = parseInt(remote_output_send_num.value);
-        var offset = parseInt(offset_slider.value);
+        var offset = 0;
+        if (offset_slider)
+            offset = parseInt(offset_slider.value);
         console.log('Received',list, timestamp+offset);
         console.log('Resending to midi output', WebMidi.outputs[remote_output_send].name);
         WebMidi.outputs[remote_output_send]._midiOutput.send(list,timestamp+offset);
