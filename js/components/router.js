@@ -44,7 +44,7 @@ export default {
   </div>
   `,
   data() {
-    var rtcoutputs = [{'name':'To Peer','id':'12345678'}];
+    var rtcoutputs = [{'name':'To Peer','id':'peer_out'}];
 
     return {
       clock:null,
@@ -167,6 +167,17 @@ export default {
 
           input.on('midimessage','all', (event) => {
             if (event.data==248) {return}
+            link.ids.forEach((outId) => {
+              if (outID=='peer_out')
+              {
+                if(send_all_toggle.checked)
+                {
+                  console.log('Sending', event.data, event.timestamp);
+                  sendMessage({'data':event.data,'timestamp':event.timestamp});
+                }
+              }
+            }
+
             link.outputs.forEach(output => {
               output._midiOutput.send(event.data,event.timestamp)
             })
