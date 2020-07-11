@@ -172,9 +172,6 @@ export default {
 
           })
 
-
-          console.log(peer_in_ports_ids)
-
           input.on('midimessage','all', (event) => {
             if (event.data==248) {return}
             
