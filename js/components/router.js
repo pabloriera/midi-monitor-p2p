@@ -89,7 +89,8 @@ export default {
     },
     buildLinks() {
       WebMidi.removeListener();
-
+      console.log('Build links')
+      
       this.inputs.forEach((input) => {
 
         input.on('noteon','all',(event) => {
