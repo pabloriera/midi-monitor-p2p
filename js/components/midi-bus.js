@@ -67,7 +67,6 @@ export default {
         inputs: WebMidi.inputs,
         outputs: WebMidi.outputs,
         rtcinputs: rtcinputs
-        rtcoutputs: rtcoutputs
       },
       activeOutputs:{},
       selected:WebMidi.inputs[0]||null
