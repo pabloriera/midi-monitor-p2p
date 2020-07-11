@@ -169,7 +169,7 @@ export default {
             if (event.data==248) {return}
             
             link.ids.forEach((outId) => {
-              if (outID=='peer_out')
+              if (outId=='peer_out')
               {
                 if(send_all_toggle.checked)
                 {
