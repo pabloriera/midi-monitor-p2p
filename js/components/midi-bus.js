@@ -82,7 +82,7 @@ export default {
     },
     'midi.outputs': function (outputs) {
       outputs.forEach((output) => {
-        // this.$set(this.activeOutputs,output.id,output)
+        this.$set(this.activeOutputs,output.id,output)
       })
     }
   },
@@ -128,6 +128,7 @@ export default {
       this.inNote=ev;
       let note = this.makeNote(ev)
       this.$midiBus.$emit('noteinon'+note.channel,note);
+      console.log('emitin on');
       this.checkChannel(ev.channel);
       this.$set(this.channels[ev.channel].notes, note.nameOct, note)
       this.$emit('update:channels', this.channels)
