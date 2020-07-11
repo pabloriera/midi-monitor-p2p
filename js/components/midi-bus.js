@@ -60,7 +60,7 @@ export default {
   `,
   props: ['absolute','channels'],
   data() {
-    var rtcinputs = [{'name':'From Peer','id':'12345678'}];
+    var rtcinputs = [{'name':'From Peer','id':'peer_in'}];
     return {
       midi: {
         supported:WebMidi.supported,
