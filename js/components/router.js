@@ -164,6 +164,7 @@ export default {
               link.outputs.push(output);
             }
 
+            console.log(input.id)
             if (input.id=='peer_in')
             {
               console.log('Routing peer to ' + outId);
