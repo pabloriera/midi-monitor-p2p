@@ -25,7 +25,7 @@ export default {
       <div :class="{selected:checkLink(input.id,output.id)}"
             v-for="output in outputs"
             v-if="input.name!=output.name"
-            @click="toggleLink(input.id,output.id)"
+            @click="toggleLink(input.id,output.id); console.log(input.id,output.id);"
             :key="output.id"
             class="status">
         {{output.name}}
@@ -35,12 +35,16 @@ export default {
   </div>
   `,
   data() {
+    var inputs_ = WebMidi.inputs;
+    var outputs_ = WebMidi.outputs;
+    // inputs_.push({'name':'new_in','id':'12345678'});
+    // outputs_.push({'name':'new_out','id':'12345678'});
     return {
       clock:null,
       inNote:null,
       inCc:null,
-      inputs:WebMidi.inputs,
-      outputs:WebMidi.outputs,
+      inputs:inputs_,
+      outputs:outputs_,
       links: {},
     }
   },

@@ -1,7 +1,10 @@
 
 Vue.config.devtools = true;
+window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = Vue
 
 Vue.prototype.$midiBus = new Vue(); // Global event bus
+
+
 
 import midiBus from './components/midi-bus.js'
 import midiMonitor from './components/midi-monitor.js'

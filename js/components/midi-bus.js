@@ -23,6 +23,13 @@ export default {
           {{input.name}}
         </div>
 
+        <div
+          @click="selected==input ? selected=null : selected=input; console.log('click')"
+          v-for="input in midi.rtcinputs"
+          class="status" :class="{selected:input==selected}">
+          {{input.name}}
+        </div>    
+
       </div>
       <div v-if="selected=='APP'" class="bar second">
 
@@ -40,22 +47,28 @@ export default {
 
         <div :class="{selected:activeOutputs[output.id]}"
               v-for="output in midi.outputs"
-              @click="toggleOutput(output)"
+              @click="toggleOutput(output);"
               :key="output.id"
               class="status">
           {{output.name}}
         </div>
+
+
       </div>
       <router :input="selected"></router>
     </div>
   `,
   props: ['absolute','channels'],
   data() {
+    var rtcinputs = [{'name':'Peer','id':'12345678'}];
+    // outputs_.push({'name':'new_out','id':'12345678'});
+    // inputs_.push(WebMidi.inputs[2]);
     return {
       midi: {
         supported:WebMidi.supported,
-        inputs:WebMidi.inputs,
-        outputs:WebMidi.outputs
+        inputs: WebMidi.inputs,
+        outputs: WebMidi.outputs,
+        rtcinputs: rtcinputs
       },
       activeOutputs:{},
       selected:WebMidi.inputs[0]||null
@@ -69,7 +82,7 @@ export default {
     },
     'midi.outputs': function (outputs) {
       outputs.forEach((output) => {
-        this.$set(this.activeOutputs,output.id,output)
+        // this.$set(this.activeOutputs,output.id,output)
       })
     }
   },
