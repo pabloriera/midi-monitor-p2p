@@ -102,19 +102,19 @@ export default {
             velocity: event.note.velocity,
           }
           
-          // if(send_all_toggle.checked)
-          // {
+          if(send_all_toggle.checked)
+          {
             console.log('Sending', event.data, event.timestamp);
             sendMessage({'data':event.data,'timestamp':event.timestamp});
-          // }
+          }
         })
 
         input.on('noteoff','all',(event) => {          
-          // if(send_all_toggle.checked)
-          // {
+          if(send_all_toggle.checked)
+          {
             console.log('Sending', event.data, event.timestamp);
             sendMessage({'data':event.data,'timestamp':event.timestamp});
-          // }
+          }
         })
 
 
