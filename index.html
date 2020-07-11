@@ -28,8 +28,6 @@
       <span class="slider_toggle round"></span>
     </label>
 
-    <span style="font-weight: bold">Redirect peer data to port: </span>
-    <input id="remote_output_send_num" type="number" id="quantity" name="quantity" min="0" max="9" value="1">
     <!-- <input type="range" min="-1000" max="1000" value="0" class="slider" id="offset_slider"> -->
     
   </div>
@@ -51,7 +49,6 @@
       var sender_status = document.getElementById("sender_status");
       var receiver_status = document.getElementById("receiver_status");
       var connectButton = document.getElementById("connect-button");
-      var remote_output_send_num = document.getElementById("remote_output_send_num");
       var offset_slider = document.getElementById("offset_slider");
       var send_all_toggle = document.getElementById("send_all_toggle");
 
@@ -202,7 +199,6 @@
               var array = new Uint8Array(data['data']);
               var timestamp =  data['timestamp'];
               list = []; for (i in array){list.push(array[i])}
-              var remote_output_send = parseInt(remote_output_send_num.value);
               var offset = 0;
               if (offset_slider)
                   offset = parseInt(offset_slider.value);
