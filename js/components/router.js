@@ -52,7 +52,7 @@ export default {
       inCc:null,
       inputs:WebMidi.inputs,
       outputs:WebMidi.outputs,
-      rtcoutputs: rtcoutputs
+      rtcoutputs: rtcoutputs,
       links: {},
     }
   },
