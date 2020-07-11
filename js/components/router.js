@@ -166,6 +166,7 @@ export default {
 
             if (input.id=='peer_in')
             {
+              console.log('Routing peer to ' + outId);
               if(!peer_in_ports_ids.includes(outId))
                 peer_in_ports_ids.push(outId)
             }
