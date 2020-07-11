@@ -44,8 +44,6 @@ export default {
   </div>
   `,
   data() {
-    var rtcoutputs = [{'name':'To Peer','id':'peer_out'}];
-
     return {
       clock:null,
       inNote:null,
@@ -115,6 +113,26 @@ export default {
     buildLinks() {
       // WebMidi.removeListener();
       console.log('Build links')
+
+      rtcinputs.forEach((input) => {
+
+        let link = this.links[input.id];
+
+        if (link) {
+          this.$set(link,'outputs', []);
+          link.ids.forEach((outId) => {
+            let output = WebMidi.getOutputById(outId);
+            if (output) {
+              link.outputs.push(output);
+            }
+            console.log(input.id)
+            console.log('Routing peer to ' + outId);
+            if(!peer_in_ports_ids.includes(outId))
+              peer_in_ports_ids.push(outId)
+        })
+        }
+
+      })
 
       this.inputs.forEach((input) => {
 

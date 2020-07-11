@@ -60,7 +60,6 @@ export default {
   `,
   props: ['absolute','channels'],
   data() {
-    var rtcinputs = [{'name':'From Peer','id':'peer_in'}];
     return {
       midi: {
         supported:WebMidi.supported,
@@ -128,7 +127,7 @@ export default {
       this.$midiBus.$emit('noteinon'+note.channel,note);
       this.checkChannel(ev.channel);
       this.$set(this.channels[ev.channel].notes, note.nameOct, note)
-      this.$emit('upda/te:channels', this.channels)
+      this.$emit('update:channels', this.channels)
     },
     noteInOff(ev) {
       let note = this.makeNote(ev)

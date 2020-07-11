@@ -64,6 +64,9 @@
       const get_id = urlParams.get('id');
       const connect_to = urlParams.get('connect');
 
+
+      var rtcinputs = [{'name':'From Peer','id':'peer_in'}];
+      var rtcoutputs = [{'name':'To Peer','id':'peer_out'}];
       var peer_in_ports_ids = [];
 
       /**
