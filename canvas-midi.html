@@ -1,0 +1,94 @@
+
+
+<script>
+  sample_fpaths = ['primed_chopin_harmonically_progresses.mid']
+
+
+  players = new Array(sample_fpaths.length);
+  vizs = new Array(sample_fpaths.length);
+
+  for (var i = 0; i < sample_fpaths.length; i++) {
+    document.getElementById("player" + i).innerHTML = '\
+<div class="player-container">\
+<button class="play-icons material-icons-extended" id="button'+i+'" onclick="startOrStop(event, players['+i+'], vizs['+i+'])">\
+play_arrow\
+</button>\
+<div class="canvas-container" id="container'+i+'">\
+<canvas class="canvas-inner" id="canvas'+i+'"></canvas>\
+</div></div>';
+
+    const container = document.getElementById("container" + i);
+    const canvas = document.getElementById('canvas' + i);
+    const ii = i;
+    const player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/salamander');
+    //players.push(player);
+    players[ii] = player;
+    player.setTempo(120);
+    player.callbackObject = {
+      run: (note) => {
+        const currentNotePosition = vizs[ii].redraw(note);
+        const containerWidth = container.getBoundingClientRect().width;
+        if (currentNotePosition > (container.scrollLeft + containerWidth)) {
+          container.scrollLeft = currentNotePosition - 20;
+        }
+      },
+      stop: () => {}
+    };
+
+    fetchMidi(sample_fpaths[i]).then((seq) => {
+      vizs[ii] = new mm.Visualizer(seq, canvas, {
+        noteHeight: 3, // 2
+        noteSpacing: 1,
+        pixelsPerTimeStep: 20, // 10
+      });
+      player.loadSamples(seq);
+    });
+  }
+
+    mm.Visualizer.prototype.isPaintingActiveNote = function (note, playedNote){
+      // `playedNote`'s start time is the current time;
+      // `note` is active if the current time is within its start/end range.
+      const time = this.getNoteStartTime(playedNote);
+      return (this.getNoteStartTime(note) <= time && time <= this.getNoteEndTime(note));
+    };
+
+
+  function fetchMidi(url, viz, canvas) {
+    return new Promise(function(resolve, reject) {
+      fetch(url)
+      .then((response) => {
+        return response.blob();
+      })
+      .then((blob) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          resolve(mm.midiToSequenceProto(e.target.result));
+        };
+        reader.readAsBinaryString(blob);
+      })
+      .catch((error) => {
+        console.log('Well, something went wrong somewhere.', error.message);
+      });
+    });
+  }
+
+  function startOrStop(event, p, viz) {
+    if (p.isPlaying()) {
+      p.stop();
+      viz.redraw()
+      event.target.textContent = 'play_arrow';
+    } else {
+      mm.Player.tone.context.resume();
+      const seq = viz.noteSequence
+      p.loadSamples(seq).then(() => p.start(
+        seq).then(() => {
+        // Stop all buttons.
+        const btns = document.querySelectorAll('button.play-icons');
+        for (let btn of btns) {
+          btn.textContent = 'play_arrow';
+        }
+      }));
+      event.target.textContent = 'stop';
+    }
+  }
+</script>
