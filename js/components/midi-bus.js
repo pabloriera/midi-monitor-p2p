@@ -70,7 +70,8 @@ export default {
         rtcinputs: rtcinputs
       },
       activeInputs:{},
-      selected:WebMidi.inputs[0]||null
+      selected:WebMidi.inputs[0]||null,
+      channels: this.channels
     }
   },
   watch: {
