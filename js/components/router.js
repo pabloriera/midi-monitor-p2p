@@ -2,7 +2,7 @@
 import {inNote, inCc} from './midi-message.js'
 
 export default {
-  props:['input'],
+  props:['input','channels'],
   components:{
     inNote, inCc
   },
@@ -54,7 +54,6 @@ export default {
     </div>
   </div>
   `,
-  // props: ['channels'],
   data() {
     return {
       clock:null,
