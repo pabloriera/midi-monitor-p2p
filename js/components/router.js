@@ -142,7 +142,7 @@ export default {
       return note
     },
     noteInOn(ev) {
-      this.inNote=ev;
+      // this.inNote=ev;
       let note = this.makeNote(ev)
       this.$midiBus.$emit('noteinon'+note.channel,note);
       this.checkChannel(ev.channel);
