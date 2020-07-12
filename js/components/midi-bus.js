@@ -33,24 +33,24 @@ export default {
       </div>
       <div v-if="selected=='APP'" class="bar second">
 
-        <div class="status" @click="start()">
-              	PLAY
-        </div>
-        <div class="status" @click="stop()">
-              	STOP
-        </div>
+        // <div class="status" @click="start()">
+        //       	PLAY
+        // </div>
+        // <div class="status" @click="stop()">
+        //       	STOP
+        // </div>
         <div class="status" @click="clear()">
                 CLEAR
         </div>
 
         <div class="bar-text">TO</div>
 
-        <div :class="{selected:activeOutputs[output.id]}"
-              v-for="output in midi.outputs"
-              @click="toggleOutput(output);"
-              :key="output.id"
+        <div :class="{selected:activeInputs[input.id]}"
+              v-for="input in midi.inputs"
+              @click="toggleOutput(input);"
+              :key="input.id"
               class="status">
-          {{output.name}}
+          {{input.name}}
         </div>
 
 
@@ -67,7 +67,7 @@ export default {
         outputs: WebMidi.outputs,
         rtcinputs: rtcinputs
       },
-      activeOutputs:{},
+      activeInputs:{},
       selected:WebMidi.inputs[0]||null
     }
   },
@@ -79,26 +79,27 @@ export default {
     },
     'midi.outputs': function (outputs) {
       outputs.forEach((output) => {
-        this.$set(this.activeOutputs,output.id,output)
+        this.$set(this.activeInputs,output.id,output)
       })
     }
   },
   methods: {
-    toggleOutput(output) {
-      if (!this.activeOutputs[output.id]) {
-        this.$set(this.activeOutputs,output.id,output)
+    toggleOutput(input) {
+      if (!this.activeInputs[input.id]) {
+        this.$set(this.activeInputs,input.id,input)
+        this.setListeners(input)
       } else {
-        this.activeOutputs[output.id]=null;
-        delete this.activeOutputs[output.id]
+        this.activeInputs[input.id]=null;
+        delete this.activeInputs[input.id]
       }
     },
     start() {
-      Object.values(this.activeOutputs).forEach(output => {
+      Object.values(this.activeInputs).forEach(output => {
         output.sendStart()
       })
     },
     stop() {
-      Object.values(this.activeOutputs).forEach(output => {
+      Object.values(this.activeInputs).forEach(output => {
         output.sendStop()
       })
     },
