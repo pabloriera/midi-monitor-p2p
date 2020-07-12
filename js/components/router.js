@@ -23,6 +23,15 @@ export default {
 
     <div class="bar">
       <div :class="{selected:checkLink(input.id,output.id)}"
+            v-for="output in monitor"
+            v-if="input.name!=output.name"
+            @click="toggleLink(input.id,output.id);"
+            :key="output.id"
+            class="status">
+        {{output.name}}
+      </div>
+
+      <div :class="{selected:checkLink(input.id,output.id)}"
             v-for="output in outputs"
             v-if="input.name!=output.name"
             @click="toggleLink(input.id,output.id);"
@@ -48,6 +57,7 @@ export default {
       clock:null,
       inNote:null,
       inCc:null,
+      monitor: [{'name':'Event Monitor','id':'event_monitor'}]
       inputs:WebMidi.inputs,
       outputs:WebMidi.outputs,
       rtcoutputs: rtcoutputs,
@@ -110,6 +120,25 @@ export default {
           }
         })
     },
+    noteInOn(ev) {
+      this.inNote=ev;
+      let note = this.makeNote(ev)
+      this.$midiBus.$emit('noteinon'+note.channel,note);
+      this.checkChannel(ev.channel);
+      this.$set(this.channels[ev.channel].notes, note.nameOct, note)
+      this.$emit('update:channels', this.channels)
+    },
+    noteInOff(ev) {
+      let note = this.makeNote(ev)
+      let nameOct = note.nameOct;
+      let ch = ev.channel
+      this.$midiBus.$emit('noteinoff'+note.channel, note)
+      if (this.channels[ch] && this.channels[ch].notes && this.channels[ch].notes[nameOct]) {
+        this.$set(this.channels[ch].notes, nameOct, note)
+      }
+      this.$emit('update:channels', this.channels)
+    },
+
     buildLinks() {
       console.log('Build links')
 
@@ -144,8 +173,15 @@ export default {
             number: event.note.number,
             velocity: event.note.velocity,
           }
-          
+
+          this.noteInOn(event);
+         
         })
+
+        input.on('noteoff','all',(event) => {
+          this.noteInOff(event);         
+        })
+
 
         input.on('controlchange','all', (event) => {
           this.inCc={
