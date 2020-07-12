@@ -22,6 +22,8 @@ export default {
     <div class="bar-text">TO</div>
 
     <div class="bar">
+
+<!--
       <div :class="{selected:checkLink(input.id,output.id)}"
             v-for="output in monitor"
             v-if="input.name!=output.name"
@@ -30,7 +32,7 @@ export default {
             class="status">
         {{output.name}}
       </div>
-
+-->
       <div :class="{selected:checkLink(input.id,output.id)}"
             v-for="output in outputs"
             v-if="input.name!=output.name"
@@ -57,7 +59,7 @@ export default {
       clock:null,
       inNote:null,
       inCc:null,
-      monitor: [{'name':'Event Monitor','id':'event_monitor'}]
+      // monitor: [{'name':'Event Monitor','id':'event_monitor'}]
       inputs:WebMidi.inputs,
       outputs:WebMidi.outputs,
       rtcoutputs: rtcoutputs,
