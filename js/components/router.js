@@ -159,6 +159,13 @@ export default {
       }
       this.$emit('update:channels', this.channels)
     },
+    ccInChange(ev) {
+      this.inCc=ev;
+      this.$midiBus.$emit(ev.channel+'cc'+ev.controller.number,ev.value)
+      this.checkChannel(ev.channel)
+      this.$set(this.channels[ev.channel].cc,ev.controller.number,ev.value);
+      this.$emit('update:channels', this.channels)
+    },
 
     buildLinks() {
       console.log('Build links')
@@ -183,9 +190,7 @@ export default {
       })
 
       this.inputs.forEach((input) => {
-
         input.removeListener();
-
         input.on('noteon','all',(event) => {
           this.inNote = {
             channel: event.channel,
@@ -194,15 +199,12 @@ export default {
             number: event.note.number,
             velocity: event.note.velocity,
           }
-
-          this.noteInOn(event);
-         
+          this.noteInOn(event);         
         })
 
         input.on('noteoff','all',(event) => {
           this.noteInOff(event);         
         })
-
 
         input.on('controlchange','all', (event) => {
           this.inCc={
@@ -210,6 +212,7 @@ export default {
             number:event.controller.number,
             value:event.value
           }
+          this.ccInChange(event);
         })
 
         let link = this.links[input.id];
@@ -222,7 +225,6 @@ export default {
             if (output) {
               link.outputs.push(output);
             }
-
             if (input.id=='peer_in')
             {
               if(!peer_in_ports_ids.includes(outId))

@@ -143,13 +143,13 @@ export default {
     //   }
     //   this.$emit('update:channels', this.channels)
     // },
-    ccInChange(ev) {
-      this.inCc=ev;
-      this.$midiBus.$emit(ev.channel+'cc'+ev.controller.number,ev.value)
-      this.checkChannel(ev.channel)
-      this.$set(this.channels[ev.channel].cc,ev.controller.number,ev.value);
-      this.$emit('update:channels', this.channels)
-    },
+    // ccInChange(ev) {
+    //   this.inCc=ev;
+    //   this.$midiBus.$emit(ev.channel+'cc'+ev.controller.number,ev.value)
+    //   this.checkChannel(ev.channel)
+    //   this.$set(this.channels[ev.channel].cc,ev.controller.number,ev.value);
+    //   this.$emit('update:channels', this.channels)
+    // },
     clear(e) {
       this.channels={}
       this.$midiBus.$emit('reset');
