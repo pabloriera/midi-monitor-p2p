@@ -155,10 +155,10 @@ export default {
       this.$emit('update:channels', this.channels)
     },
     setListeners(input) {
-      input.removeListener();
-      input.addListener('noteon', "all", this.noteInOn);
-      input.addListener('noteoff', "all", this.noteInOff);
-      input.addListener('controlchange', "all", this.ccInChange);
+      // input.removeListener();
+      // input.addListener('noteon', "all", this.noteInOn);
+      // input.addListener('noteoff', "all", this.noteInOff);
+      // input.addListener('controlchange', "all", this.ccInChange);
   //    input.addListener('stop', 'all', this.reset)
     }
   },
