@@ -54,6 +54,7 @@ export default {
     </div>
   </div>
   `,
+  props: ['channels'],
   data() {
     return {
       clock:null,
