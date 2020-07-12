@@ -7,6 +7,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <link rel="stylesheet" href="css/styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/@magenta/music@1.2.2"></script>
+  <style>
+  @import url(//fonts.googleapis.com/icon?family=Material+Icons+Extended);
+
+  .player-container {
+    position: relative;
+    border: 1px solid #bdbdbd;
+    max-width: 100%;
+    display: inline-block;
+  }
+
+  .canvas-container {
+    background: white;
+    overflow-x: auto;
+    font-size: 0em;
+  }
+
+  #player0 .player-container {
+    display: inline-block;
+  }
+
+  #player0 .canvas-container {
+    display: inline-block;
+  }
+
+  #canvas0 {
+    margin-right: 6px;
+    margin-bottom: 5px;
+  }
+
+  #player0 .play-icons {
+    position: static;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .play-icons {
+    position: absolute;
+    background: transparent;
+    outline: none;
+    border: none;
+    padding: 0;
+    top:0; left:0;
+  }
+</style>
+
 </head>
 
 
