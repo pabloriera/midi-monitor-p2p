@@ -33,16 +33,18 @@ export default {
       </div>
       <div v-if="selected=='APP'" class="bar second">
 
-        // <div class="status" @click="start()">
-        //       	PLAY
-        // </div>
-        // <div class="status" @click="stop()">
-        //       	STOP
-        // </div>
+<!--
+        <div class="status" @click="start()">
+              	PLAY
+        </div>
+        <div class="status" @click="stop()">
+              	STOP
+        </div>
+-->
+
         <div class="status" @click="clear()">
                 CLEAR
         </div>
-
         <div class="bar-text">TO</div>
 
         <div :class="{selected:activeInputs[input.id]}"
