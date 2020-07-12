@@ -122,6 +122,11 @@ export default {
           }
         })
     },
+    checkChannel(ch) {
+      if (!this.channels[ch]) {
+        this.$set(this.channels, ch, {num:ch,notes:{}, cc:{}})
+      }
+    },
     makeNote(ev) {
       let note=ev.note;
       let time = new Date();
