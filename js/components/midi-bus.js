@@ -57,7 +57,7 @@ export default {
 
 
       </div>
-      <router :input="selected"></router>
+      <router :input="selected" :channels="channels"></router>
     </div>
   `,
   props: ['absolute','channels'],
