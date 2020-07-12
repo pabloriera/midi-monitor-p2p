@@ -110,20 +110,20 @@ export default {
         this.$set(this.channels, ch, {num:ch,notes:{}, cc:{}})
       }
     },
-    makeNote(ev) {
-      let note=ev.note;
-      let time = new Date();
-      note.id=ev.note.name+note.octave+time.getTime();
-      note.nameOct=note.name+note.octave;
-      note.channel=ev.channel;
-      if (ev.type=='noteoff') {
-        note.velocity=0;
-      } else {
-        note.velocity=ev.velocity;
-      }
-      note.digit = (note.number+3)%12;
-      return note
-    },
+    // makeNote(ev) {
+    //   let note=ev.note;
+    //   let time = new Date();
+    //   note.id=ev.note.name+note.octave+time.getTime();
+    //   note.nameOct=note.name+note.octave;
+    //   note.channel=ev.channel;
+    //   if (ev.type=='noteoff') {
+    //     note.velocity=0;
+    //   } else {
+    //     note.velocity=ev.velocity;
+    //   }
+    //   note.digit = (note.number+3)%12;
+    //   return note
+    // },
     // noteInOn(ev) {
     //   this.inNote=ev;
     //   let note = this.makeNote(ev)
