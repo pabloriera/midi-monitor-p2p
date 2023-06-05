@@ -203,10 +203,10 @@
                 var offset = 0;
                 if (offset_slider)
                     offset = parseInt(offset_slider.value);
-                console.log('Received', list, timestamp + offset);
+                // console.log('Received', list, timestamp + offset);
                 peer_in_ports_ids.forEach((id) => {
                     if (WebMidi.getOutputById(id).name) {
-                        console.log('Resending to midi output', WebMidi.getOutputById(id).name);
+                        // console.log('Resending to midi output', WebMidi.getOutputById(id).name);
                         WebMidi.getOutputById(id)._midiOutput.send(list);
                     }
                 })
